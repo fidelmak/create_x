@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'screens/task_screen.dart';
+
 void main() {
   runApp(const CreateTask());
 }
@@ -9,6 +11,8 @@ class CreateTask extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return MaterialApp(
+      home: TaskScreen(),
+    );
   }
 }
