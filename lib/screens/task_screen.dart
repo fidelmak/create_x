@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../widget/task_widget.dart';
+import 'add_task.dart';
 
 class TaskScreen extends StatefulWidget {
   const TaskScreen({super.key});
@@ -9,13 +10,18 @@ class TaskScreen extends StatefulWidget {
   State<TaskScreen> createState() => _TaskScreenState();
 }
 
+//Widget buildBottomSheet;
+
 class _TaskScreenState extends State<TaskScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.yellow.shade900,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet(
+              context: context, builder: (context) => AddTaskScreen());
+        },
         backgroundColor: Colors.yellow.shade900,
         child: Icon(Icons.add),
       ),
