@@ -16,7 +16,7 @@ class AddTaskScreen extends StatelessWidget {
         child: Container(
           margin: EdgeInsets.all(24),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(16.0),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -31,14 +31,18 @@ class AddTaskScreen extends StatelessWidget {
                       decoration: InputDecoration(
                         fillColor: Colors.yellow.shade900,
                       )),
-                  ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.yellow.shade900, // background
-                        // foreground
-                      ),
-                      child: Text("Add",
-                          style: TextStyle(color: Colors.white, fontSize: 24)))
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.yellow.shade900, // background
+                          // foreground
+                        ),
+                        child: Text("Add",
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 24))),
+                  )
                 ]),
           ),
         ),
