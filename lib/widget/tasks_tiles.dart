@@ -7,11 +7,12 @@ class TaskTiles extends StatefulWidget {
 
 class _TaskTilesState extends State<TaskTiles> {
   bool isChecked = true;
-   checkBoxCallBack ( bool checkBoxState) {
-        setState(() {
-          isChecked = checkBoxState;
-        });
-      }
+
+  void clickCheck(bool checkBoxState) {
+    setState(() {
+      isChecked = checkBoxState;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,21 +22,21 @@ class _TaskTilesState extends State<TaskTiles> {
         style: TextStyle(
             decoration: isChecked ? TextDecoration.lineThrough : null),
       ),
-      trailing: CheckState(isChecked, checkBoxCallBack),
+      trailing: CheckState(
+        checkBoxState: isChecked,
+        toggleCheck: clickCheck,
+      ),
     );
   }
 }
 
 class CheckState extends StatelessWidget {
   final bool checkBoxState;
-  final Function toggleCheckBoxState;
-  CheckState(this.checkBoxState, this.toggleCheckBoxState);
+  final Function toggleCheck;
+  CheckState({required this.toggleCheck, required this.checkBoxState});
 
   @override
   Widget build(BuildContext context) {
-    return Checkbox(
-      value: checkBoxState,
-      onChanged: toggleCheckBoxState;
-    );
+    return Checkbox(value: checkBoxState, onChanged: toggleCheck());
   }
 }
