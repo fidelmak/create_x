@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../model/tasks.dart';
 import '../widget/task_widget.dart';
 import 'add_task.dart';
 
 class TaskScreen extends StatefulWidget {
-  const TaskScreen({super.key});
-
   @override
   State<TaskScreen> createState() => _TaskScreenState();
 }
@@ -13,6 +12,12 @@ class TaskScreen extends StatefulWidget {
 //Widget buildBottomSheet;
 
 class _TaskScreenState extends State<TaskScreen> {
+  List<Task> task = [
+    Task(name: "Eat"),
+    Task(name: "code"),
+    Task(name: "read book"),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +25,15 @@ class _TaskScreenState extends State<TaskScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
-              context: context, builder: (context) => AddTaskScreen());
+              context: context,
+              builder: (context) => AddTaskScreen(
+                    addTaskCallback: (newTask) {
+                      setState(() {
+                        task.add(Task(name: newTask));
+                        Navigator.pop(context);
+                      });
+                    },
+                  ));
         },
         backgroundColor: Colors.yellow.shade900,
         child: Icon(Icons.add),
@@ -54,7 +67,7 @@ class _TaskScreenState extends State<TaskScreen> {
               SizedBox(
                 height: 10,
               ),
-              Text("12 task ",
+              Text("${task.length} task ",
                   style: TextStyle(fontSize: 18, color: Colors.white)),
             ]),
           ),
@@ -66,7 +79,9 @@ class _TaskScreenState extends State<TaskScreen> {
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(36),
                       topRight: Radius.circular(36))),
-              child: TaskWidget(),
+              child: TaskWidget(
+                tasks: task,
+              ),
             ),
           ),
         ],
