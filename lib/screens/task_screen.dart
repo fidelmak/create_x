@@ -1,23 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../model/tasks.dart';
+//import '../model/tasks.dart';
+import '../model/tasksData.dart';
 import '../widget/task_widget.dart';
 import 'add_task.dart';
 
-class TaskScreen extends StatefulWidget {
-  @override
-  State<TaskScreen> createState() => _TaskScreenState();
-}
-
-//Widget buildBottomSheet;
-
-class _TaskScreenState extends State<TaskScreen> {
-  List<Task> task = [
-    Task(name: "Eat"),
-    Task(name: "code"),
-    Task(name: "read book"),
-  ];
-
+class TaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,18 +14,10 @@ class _TaskScreenState extends State<TaskScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
-              context: context,
-              builder: (context) => AddTaskScreen(
-                    addTaskCallback: (newTask) {
-                      setState(() {
-                        task.add(Task(name: newTask));
-                        Navigator.pop(context);
-                      });
-                    },
-                  ));
+              context: context, builder: (context) => AddTaskScreen());
         },
         backgroundColor: Colors.yellow.shade900,
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,10 +34,10 @@ class _TaskScreenState extends State<TaskScreen> {
                     size: 30,
                     color: Colors.yellow.shade900,
                   )),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              Text(
+              const Text(
                 "create_x",
                 style: TextStyle(
                   fontSize: 50,
@@ -64,24 +45,22 @@ class _TaskScreenState extends State<TaskScreen> {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
-              Text("${task.length} task ",
-                  style: TextStyle(fontSize: 18, color: Colors.white)),
+              Text("${Provider.of<TaskData>(context).taskCounter} task ",
+                  style: const TextStyle(fontSize: 18, color: Colors.white)),
             ]),
           ),
           Expanded(
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              decoration: BoxDecoration(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(36),
                       topRight: Radius.circular(36))),
-              child: TaskWidget(
-                tasks: task,
-              ),
+              child: TaskWidget(),
             ),
           ),
         ],
