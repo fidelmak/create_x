@@ -15,8 +15,9 @@ class CreateTask extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => TaskData(),
-      child: MaterialApp(home: const MyCard() //TaskScreen(),
-          ),
+      child: MaterialApp(
+        home: const TaskScreen(),
+      ),
     );
   }
 }
