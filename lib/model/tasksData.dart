@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:create_x/model/tasks.dart';
 import 'package:flutter/foundation.dart';
 
@@ -7,17 +9,26 @@ class TaskData extends ChangeNotifier {
     Task(name: "code"),
     Task(name: "read book"),
   ];
-  List<Task> get task {
-    return _task;
-  }
+  UnmodifiableListView<Task> get task => UnmodifiableListView(_task);
 
   int get taskCounter {
     return _task.length;
   }
 
   void addmyTask(String newTask) {
+    //task.add(Task(name: "paulfidelis"));
     final tasks = Task(name: newTask);
     _task.add(tasks);
+    notifyListeners();
+  }
+
+  void updateTask(Task task) {
+    task.toggleDone();
+    notifyListeners();
+  }
+
+  void deleteTask(Task task) {
+    _task.remove(task);
     notifyListeners();
   }
 }
